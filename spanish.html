@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spanish – Class 10 CBSE Practice Quiz</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--brand:#3157d5;--line:#e3e8f2;--bg:#f4f7fc;--good:#137547;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.5}
+.wrap{max-width:850px;margin:24px auto;padding:16px}
+header{background:linear-gradient(135deg,#182b65,#4269df);color:white;padding:28px;border-radius:18px}
+h1{font-size:clamp(24px,5vw,34px);margin:0 0 8px}header p{margin:6px 0;color:#e8edff}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.pill{font-size:12px;background:#ffffff20;border:1px solid #ffffff55;padding:5px 10px;border-radius:20px}
+.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;margin:16px 0;box-shadow:0 3px 14px #17203308}
+.topline{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px}
+.progress{height:8px;background:#e9edf6;border-radius:20px;overflow:hidden;margin:12px 0 18px}.bar{height:100%;background:var(--brand);width:0;transition:.2s}
+.qnum{font-size:13px;color:var(--brand);font-weight:bold;text-transform:uppercase;letter-spacing:.05em}
+.question{font-size:19px;font-weight:700;margin:8px 0 16px}
+.option{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin:9px 0;cursor:pointer}
+.option:hover{border-color:#9aaceb;background:#f8faff}.option input{margin-top:4px;accent-color:var(--brand)}
+.option.selected{border-color:var(--brand);background:#f2f5ff}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:15px}
+.primary{background:var(--brand);color:white}.secondary{background:#edf1f8;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}
+.feedback{margin-top:14px;padding:12px;border-radius:10px;font-size:14px;display:none}
+.feedback.good{display:block;background:#eaf7f0;color:var(--good)}.feedback.bad{display:block;background:#fff0ef;color:var(--bad)}
+#result{display:none;text-align:center}.score{font-size:42px;font-weight:800;color:var(--brand);margin:8px}
+.review{text-align:left;margin-top:20px}.review-item{padding:13px 0;border-top:1px solid var(--line)}.review-item strong{display:block}.correct{color:var(--good)}.wrong{color:var(--bad)}
+.small{font-size:13px;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(max-width:520px){.wrap{padding:10px;margin:10px auto}header{padding:22px}.panel{padding:15px}.question{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Spanish — Class 10 CBSE</h1>
+  <p>Board exam practice · Monday preparation</p>
+  <p>Grammar, vocabulary and culture: ser/estar, present tense, pretérito, gustar, comparatives and more.</p>
+  <div class="pills"><span class="pill">100 MCQs</span><span class="pill">Board-exam practice</span><span class="pill">Instant explanations</span><span class="pill">Mobile friendly</span></div>
+</header>
+<div class="panel" id="quiz">
+  <div class="topline"><span id="counter">Question 1 of 100</span><span id="answered">0 answered</span></div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="qnum" id="topic"></div>
+  <div class="question" id="question"></div>
+  <div id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="controls">
+    <button class="secondary" id="prev">Previous</button>
+    <button class="primary" id="next">Next question</button>
+    <button class="primary" id="submit" style="display:none">Submit quiz</button>
+  </div>
+  <p class="small">Choose one answer for each question. You can move back and change your answers before submitting.</p>
+</div>
+<div class="panel" id="result">
+  <div class="qnum">Quiz completed</div>
+  <h2>Your result</h2>
+  <div class="score" id="score"></div>
+  <div id="message"></div>
+  <div class="controls" style="justify-content:center"><button class="primary" id="retry">Try again</button><button class="secondary" id="print">Print result</button></div>
+  <div class="review" id="review"></div>
+</div>
+<footer>Practice resource for learning. Questions are independently written from the listed Class 10 AI topic coverage; this is not an official CBSE paper.</footer>
+</div>
+<script>
+const questions = [
+{t:"Artículos y género",q:"Elige el artículo correcto: ___ casa es grande.",o:["El","Un","La","Los"],a:2,e:"'Casa' es un sustantivo femenino singular, así que lleva 'la'."},
+{t:"Artículos y género",q:"¿Cuál de estas palabras es masculina?",o:["el problema","la flor","la mesa","la mano"],a:0,e:"Las palabras de origen griego terminadas en -ma (problema, tema, mapa) son masculinas."},
+{t:"Artículos y género",q:"¿Cuál es el plural correcto de 'el lápiz'?",o:["los lápizs","las lápices","los lápices","los lapizes"],a:2,e:"Las palabras terminadas en -z cambian a -ces en plural: lápiz → lápices."},
+{t:"Artículos y género",q:"Completa: ___ agua está fría.",o:["Una","El","La","Las"],a:1,e:"'Agua' es femenina, pero empieza por 'a' tónica y usa 'el' en singular: el agua."},
+{t:"Artículos y género",q:"'las' se usa con:",o:["sustantivos femeninos plurales","verbos en infinitivo","sustantivos masculinos singulares","sustantivos masculinos plurales"],a:0,e:"'Las' es el artículo definido femenino plural: las casas, las flores."},
+{t:"Artículos y género",q:"El femenino de 'el profesor' es:",o:["la profesor","el profesora","las profesora","la profesora"],a:3,e:"Muchas profesiones añaden -a para el femenino: profesor → profesora."},
+{t:"Artículos y género",q:"Completa: ___ mujer es mi vecina.",o:["Unos","Una","Un","Unas"],a:1,e:"'Mujer' es femenino singular, y aquí es indeterminado: una mujer."},
+{t:"Ser, estar y hay",q:"Completa: Yo ___ de la India.",o:["hay","soy","estoy","es"],a:1,e:"El origen se expresa con 'ser': soy de la India."},
+{t:"Ser, estar y hay",q:"Completa: Ella ___ en casa ahora.",o:["hay","son","está","es"],a:2,e:"La ubicación temporal se expresa con 'estar': está en casa."},
+{t:"Ser, estar y hay",q:"Completa: ___ dos libros en la mesa.",o:["Es","Hay","Son","Están"],a:1,e:"Para indicar existencia se usa 'hay': hay dos libros."},
+{t:"Ser, estar y hay",q:"Completa: Nosotros ___ estudiantes.",o:["somos","estamos","son","hay"],a:0,e:"La identidad o profesión usa 'ser': somos estudiantes."},
+{t:"Ser, estar y hay",q:"Completa: Madrid ___ la capital de España.",o:["es","está","son","hay"],a:0,e:"Una característica permanente o definición usa 'ser': Madrid es la capital."},
+{t:"Ser, estar y hay",q:"Completa: El café ___ caliente.",o:["hay","son","es","está"],a:3,e:"Un estado momentáneo usa 'estar': el café está caliente."},
+{t:"Ser, estar y hay",q:"Completa: ¿Dónde ___ el baño?",o:["está","es","hay","son"],a:0,e:"Para preguntar por la ubicación de algo concreto se usa 'estar': ¿Dónde está el baño?"},
+{t:"Ser, estar y hay",q:"Completa: Mi padre ___ médico.",o:["son","hay","es","está"],a:2,e:"La profesión se expresa con 'ser': mi padre es médico."},
+{t:"Ser, estar y hay",q:"Completa: Los libros ___ sobre la mesa.",o:["son","están","es","hay"],a:1,e:"La ubicación de algo concreto usa 'estar': los libros están sobre la mesa."},
+{t:"Ser, estar y hay",q:"Completa: ___ muchas personas en el parque.",o:["Están","Son","Es","Hay"],a:3,e:"La existencia o cantidad indeterminada se expresa con 'hay'."},
+{t:"El verbo tener",q:"Completa: Yo ___ quince años.",o:["tienes","tiene","tengo","tener"],a:2,e:"La edad se expresa con 'tener': yo tengo quince años."},
+{t:"El verbo tener",q:"Completa: ¿Cuántos hermanos ___ tú?",o:["tienes","tiene","tenéis","tengo"],a:0,e:"La forma de 'tener' para 'tú' es 'tienes'."},
+{t:"El verbo tener",q:"Completa: Ella ___ que estudiar hoy.",o:["tienen","tengo","tienes","tiene"],a:3,e:"'Tener que + infinitivo' expresa obligación: ella tiene que estudiar."},
+{t:"El verbo tener",q:"Completa: Nosotros ___ hambre.",o:["tenéis","tenemos","tienen","tiene"],a:1,e:"'Tener hambre' significa tener la sensación de hambre: nosotros tenemos hambre."},
+{t:"El verbo tener",q:"Completa: Ellos ___ razón.",o:["tiene","tienes","tienen","tenemos"],a:2,e:"'Tener razón' significa estar en lo correcto: ellos tienen razón."},
+{t:"Presente de indicativo",q:"Completa: Yo ___ (hablar) español.",o:["hablamos","hablas","habla","hablo"],a:3,e:"Verbo -ar: la forma de 'yo' termina en -o → hablo."},
+{t:"Presente de indicativo",q:"Completa: Tú ___ (comer) en casa.",o:["como","comes","comemos","come"],a:1,e:"Verbo -er: la forma de 'tú' termina en -es → comes."},
+{t:"Presente de indicativo",q:"Completa: Él ___ (vivir) en Delhi.",o:["vives","viven","vivo","vive"],a:3,e:"Verbo -ir: la forma de 'él/ella' termina en -e → vive."},
+{t:"Presente de indicativo",q:"Completa: Nosotros ___ (estudiar) mucho.",o:["estudian","estudias","estudiamos","estudia"],a:2,e:"Verbo -ar: la forma de 'nosotros' termina en -amos → estudiamos."},
+{t:"Presente de indicativo",q:"Completa: Vosotros ___ (aprender) rápido.",o:["aprenden","aprendéis","aprendemos","aprendes"],a:1,e:"Verbo -er: la forma de 'vosotros' termina en -éis → aprendéis."},
+{t:"Presente de indicativo",q:"Completa: Ellos ___ (escribir) cartas.",o:["escribes","escribimos","escriben","escribe"],a:2,e:"Verbo -ir: la forma de 'ellos' termina en -en → escriben."},
+{t:"Presente de indicativo",q:"Los verbos en -ar terminan en ___ en la forma 'tú'.",o:["-a","-as","-os","-es"],a:1,e:"hablar → hablas. La terminación de 'tú' para los verbos -ar es -as."},
+{t:"Presente de indicativo",q:"Los verbos en -er terminan en ___ en la forma 'nosotros'.",o:["-amos","-emos","-imos","-en"],a:1,e:"comer → comemos. Los verbos -er hacen -emos en 'nosotros'."},
+{t:"Presente de indicativo",q:"Completa: Ella ___ (trabajar) en un hospital.",o:["trabajan","trabajo","trabaja","trabajas"],a:2,e:"Verbo -ar: la forma de 'ella' termina en -a → trabaja."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Yo ___ (ir) al colegio todos los días.",o:["vas","va","voy","vamos"],a:2,e:"'Ir' es irregular: yo voy, tú vas, él va."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Tú ___ (ser) muy amable.",o:["son","soy","es","eres"],a:3,e:"'Ser' es irregular: yo soy, tú eres, él es."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Ellos ___ (hacer) la tarea.",o:["hacen","hacemos","haces","hace"],a:0,e:"'Hacer' es irregular en 'yo' (hago), pero 'ellos' es regular: hacen."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Yo ___ (poner) la mesa.",o:["ponen","pones","pongo","pone"],a:2,e:"'Poner' es irregular en 'yo': pongo."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Ella ___ (decir) la verdad.",o:["dicen","dice","dices","digo"],a:1,e:"'Decir' cambia la raíz: yo digo, tú dices, ella dice."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Nosotros ___ (dormir) ocho horas.",o:["duermes","duermen","dormimos","duermo"],a:2,e:"'Dormir' cambia a 'ue' en formas acentuadas, pero 'nosotros' mantiene la raíz: dormimos."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Yo ___ (levantarse) a las siete.",o:["te levantas","nos levantamos","me levanto","se levanta"],a:2,e:"Verbo reflexivo: el pronombre debe concordar. Yo me levanto."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: ¿A qué hora ___ (acostarse) tú?",o:["te acuestas","me acuesto","nos acostamos","se acuesta"],a:0,e:"'Acostarse' cambia a 'ue' y usa el pronombre 'te' para tú: te acuestas."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Ellos ___ (vestirse) rápidamente.",o:["se visten","te vistes","me visto","se viste"],a:0,e:"El pronombre para 'ellos' es 'se': se visten."},
+{t:"Verbos irregulares y reflexivos",q:"Completa: Yo ___ (saber) la respuesta.",o:["sabo","sabe","sabes","sé"],a:3,e:"'Saber' es irregular en 'yo': sé."},
+{t:"El verbo gustar",q:"Completa: Me ___ los libros de aventuras.",o:["gustan","gustas","gusta","gusto"],a:0,e:"Con 'gustar' el verbo concuerda con la cosa gustada: 'los libros' es plural → gustan."},
+{t:"El verbo gustar",q:"Completa: ¿Te ___ el café?",o:["gustan","gusta","gusto","gustas"],a:1,e:"'El café' es singular, así que se usa 'gusta'."},
+{t:"El verbo gustar",q:"Completa: A ella le ___ las flores.",o:["gusta","gustamos","gustan","gusto"],a:2,e:"'Las flores' es plural → gustan. El pronombre para ella es 'le'."},
+{t:"El verbo gustar",q:"Completa: Nos ___ mucho viajar.",o:["gusta","gustamos","gusto","gustan"],a:0,e:"Un infinitivo funciona como sujeto singular → gusta."},
+{t:"El verbo gustar",q:"En la estructura 'me gustan los libros', ¿qué es el sujeto gramatical?",o:["yo","gustan","los libros","me"],a:2,e:"Con 'gustar' el sujeto es la cosa que gusta; la persona es el objeto indirecto."},
+{t:"Pretérito indefinido",q:"Completa: Ayer yo ___ (hablar) con mi amigo.",o:["hablo","hablé","hablaré","hablaba"],a:1,e:"Pretérito indefinido de -ar en 'yo': hablé."},
+{t:"Pretérito indefinido",q:"Completa: El año pasado nosotros ___ (viajar) a España.",o:["viajamos","viajan","viajaremos","viajábamos"],a:0,e:"Los verbos -ar en pretérito son regulares en 'nosotros': viajamos."},
+{t:"Pretérito indefinido",q:"Completa: Ella ___ (comer) paella anoche.",o:["comió","come","comía","comerá"],a:0,e:"Pretérito indefinido de -er en 'ella': comió."},
+{t:"Pretérito indefinido",q:"Completa: Ellos ___ (vivir) en México en 2010.",o:["vivirán","vivían","viven","vivieron"],a:3,e:"Pretérito indefinido de -ir en 'ellos': vivieron."},
+{t:"Pretérito indefinido",q:"Completa: ¿___ (ir) tú al cine ayer?",o:["ibas","vas","irás","fuiste"],a:3,e:"'Ir' es irregular: yo fui, tú fuiste."},
+{t:"Pretérito indefinido",q:"Completa: Yo ___ (ser) muy feliz en mi infancia.",o:["seré","fui","soy","era"],a:1,e:"'Ser' e 'ir' comparten la misma forma en pretérito: fui, fuiste, fue."},
+{t:"Pretérito indefinido",q:"Completa: Él ___ (tener) un accidente la semana pasada.",o:["tuvo","tendrá","tiene","tenía"],a:0,e:"'Tener' es irregular en pretérito: tuvo."},
+{t:"Pretérito indefinido",q:"Completa: Nosotros ___ (hacer) la tarea anoche.",o:["hacíamos","hacemos","hicimos","haremos"],a:2,e:"'Hacer' es irregular en pretérito: hizo, hicimos."},
+{t:"Pretérito indefinido",q:"Los verbos en -ar forman la 1ª persona singular (yo) del pretérito con la terminación:",o:["-ía","-é","-o","-aba"],a:1,e:"hablar → hablé. La terminación es -é con acento."},
+{t:"Pretérito indefinido",q:"Los verbos en -ir forman la 3ª persona singular (él/ella) del pretérito con la terminación:",o:["-ía","-ió","-ó","-e"],a:1,e:"vivir → vivió. La terminación es -ió con acento."},
+{t:"Futuro próximo",q:"Completa: Mañana yo ___ a estudiar para el examen.",o:["va","ir","voy","vas"],a:2,e:"El futuro próximo se forma con ir + a + infinitivo: yo voy a estudiar."},
+{t:"Futuro próximo",q:"Completa: ¿Qué ___ a hacer tú este fin de semana?",o:["voy","va","vas","vamos"],a:2,e:"Para 'tú' se usa 'vas': ¿Qué vas a hacer?"},
+{t:"Futuro próximo",q:"Completa: Ellos ___ a venir a la fiesta.",o:["van","vamos","va","voy"],a:0,e:"Para 'ellos' se usa 'van': ellos van a venir."},
+{t:"Futuro próximo",q:"¿Qué expresa la estructura 'ir a + infinitivo'?",o:["Una acción futura cercana","Una acción habitual en el pasado","Una acción pasada","Una orden negativa"],a:0,e:"'Ir a + infinitivo' expresa intención o futuro próximo: voy a comer."},
+{t:"Futuro próximo",q:"Completa: Nosotros ___ a salir esta noche.",o:["va","vamos","van","voy"],a:1,e:"Para 'nosotros' se usa 'vamos': nosotros vamos a salir."},
+{t:"Comparativos",q:"Completa: Ana es ___ alta ___ María.",o:["tan ... como que","menos ... de","más ... que","muy ... que"],a:2,e:"El comparativo de superioridad es 'más + adjetivo + que'."},
+{t:"Comparativos",q:"Completa: Este libro es ___ interesante que ese.",o:["más","mucho","muy","tan"],a:0,e:"Comparativo de superioridad: más interesante que."},
+{t:"Comparativos",q:"El comparativo irregular de 'bueno' es:",o:["más bueno","mejor","muy bueno","buenísimo"],a:1,e:"'Bueno' tiene comparativo irregular: mejor (better)."},
+{t:"Comparativos",q:"Completa el superlativo: Él es el ___ alto de la clase.",o:["muy","mucho","más","tan"],a:2,e:"El superlativo se forma con el/la + más + adjetivo: el más alto."},
+{t:"Comparativos",q:"'menos ... que' significa:",o:["menos que","tanto como","igual que","más que"],a:0,e:"Es el comparativo de inferioridad: menos interesante que."},
+{t:"Posesivos y demostrativos",q:"Completa: ___ libro es nuevo. (mi)",o:["Mía","Mis","Mío","Mi"],a:3,e:"Antes de un sustantivo singular se usa 'mi' (sin acento)."},
+{t:"Posesivos y demostrativos",q:"Completa: ___ padres viven en Delhi. (my)",o:["Míos","Mías","Mi","Mis"],a:3,e:"Antes de un sustantivo plural se usa 'mis'."},
+{t:"Posesivos y demostrativos",q:"Completa: ___ casa es grande. (nuestra)",o:["Nuestras","Nuestro","Nuestros","Nuestra"],a:3,e:"'Casa' es femenino singular → nuestra."},
+{t:"Posesivos y demostrativos",q:"'este' se refiere a algo que está:",o:["cerca del oyente","lejos del hablante","muy lejos de ambos","cerca del hablante"],a:3,e:"este/esta = cerca del hablante (this)."},
+{t:"Posesivos y demostrativos",q:"'esos' se refiere a:",o:["varios objetos muy lejos","un objeto lejano singular","un objeto cerca del hablante","varios objetos cerca del oyente"],a:3,e:"ese/esa/esos/esas = cerca del oyente (that/those)."},
+{t:"Posesivos y demostrativos",q:"Completa: ___ hermanos son simpáticos. (tus)",o:["Tuyas","Tu","Tus","Tuyos"],a:2,e:"Antes de un sustantivo plural se usa 'tus'."},
+{t:"Palabras interrogativas",q:"Completa: ¿___ te llamas?",o:["Quién","Cómo","Cuál","Qué"],a:1,e:"Para preguntar el nombre se usa ¿Cómo te llamas?"},
+{t:"Palabras interrogativas",q:"Completa: ¿___ años tienes?",o:["Cuántos","Cómo","Qué","Cuántas"],a:0,e:"'Años' es masculino plural → cuántos."},
+{t:"Palabras interrogativas",q:"Completa: ¿___ está la biblioteca?",o:["Quién","Dónde","Cuándo","Cómo"],a:1,e:"Para preguntar por un lugar se usa 'dónde'."},
+{t:"Palabras interrogativas",q:"Completa: ¿___ es tu cumpleaños?",o:["Quién","Cuánto","Cuándo","Dónde"],a:2,e:"Para preguntar por el tiempo o la fecha se usa 'cuándo'."},
+{t:"Palabras interrogativas",q:"Completa: ¿___ estudias español?",o:["Cuál","Que","Por qué","Porque"],a:2,e:"Para preguntar la causa se usa 'por qué' (dos palabras, con acento)."},
+{t:"Por y para",q:"Completa: Este regalo es ___ ti.",o:["para","en","de","por"],a:0,e:"'Para' indica destinatario: el regalo es para ti."},
+{t:"Por y para",q:"Completa: Gracias ___ tu ayuda.",o:["por","para","de","en"],a:0,e:"'Por' se usa para expresar causa o agradecimiento: gracias por tu ayuda."},
+{t:"Muy y mucho",q:"Completa: El libro es ___ interesante.",o:["mucho","mucha","muchos","muy"],a:3,e:"'Muy' se usa antes de un adjetivo: muy interesante."},
+{t:"Muy y mucho",q:"Completa: Tengo ___ amigos en la escuela.",o:["muy","mucho","muchos","mucha"],a:2,e:"'Mucho' concuerda con el sustantivo: muchos amigos."},
+{t:"Por y para",q:"Completa: Trabajo ___ la mañana en una oficina.",o:["para","a","por","de"],a:2,e:"'Por' se usa para partes del día: por la mañana."},
+{t:"Números, hora y fecha",q:"¿Cómo se dice 10:30?",o:["Son las once y media","Es la diez y media","Son las diez y media","Son las diez y cuarto"],a:2,e:"'Y media' = y treinta minutos: son las diez y media."},
+{t:"Números, hora y fecha",q:"El número 'veinte' es:",o:["12","20","15","30"],a:1,e:"Veinte = 20."},
+{t:"Números, hora y fecha",q:"'El lunes' es:",o:["Monday","Sunday","Tuesday","Friday"],a:0,e:"Los días de la semana: lunes, martes, miércoles, jueves, viernes."},
+{t:"Números, hora y fecha",q:"'enero' es:",o:["January","December","March","June"],a:0,e:"Los meses: enero, febrero, marzo, abril..."},
+{t:"Vocabulario",q:"La hermana de mi padre es mi:",o:["prima","tía","abuela","sobrina"],a:1,e:"La hermana de tu padre es tu tía (aunt)."},
+{t:"Vocabulario",q:"El hijo de mi hermano es mi:",o:["sobrino","tío","primo","nieto"],a:0,e:"El hijo de tu hermano es tu sobrino (nephew)."},
+{t:"Vocabulario",q:"'el desayuno' es:",o:["snack","dinner","lunch","breakfast"],a:3,e:"Desayuno = breakfast; comida/almuerzo = lunch; cena = dinner."},
+{t:"Vocabulario",q:"'la cocina' es la habitación donde:",o:["se duerme","se cocina la comida","se lava la ropa","se estudia"],a:1,e:"La cocina es la cocina de la casa, donde se prepara la comida."},
+{t:"Vocabulario",q:"El médico trabaja en:",o:["la biblioteca","la panadería","el hospital","la escuela"],a:2,e:"El médico trabaja en el hospital."},
+{t:"Vocabulario",q:"'Hace frío' se dice sobre todo en:",o:["la primavera","el invierno","el verano","el otoño"],a:1,e:"Hace frío en invierno; en verano hace calor."},
+{t:"Vocabulario",q:"'la biblioteca' es el lugar donde:",o:["se juega al fútbol","se come","se compran medicinas","se leen y se piden libros"],a:3,e:"La biblioteca es donde se consultan y se prestan libros."},
+{t:"Vocabulario",q:"Una respuesta correcta a '¿Cómo estás?' es:",o:["Tengo doce años","Me llamo Ana","Bien, gracias","Son las dos"],a:2,e:"'¿Cómo estás?' pregunta el estado; se responde 'Bien, gracias'."},
+{t:"Vocabulario",q:"'Adiós' significa:",o:["thank you","hello","goodbye","please"],a:2,e:"Adiós = goodbye; hola = hello."},
+{t:"Cultura",q:"La capital de España es:",o:["Valencia","Barcelona","Sevilla","Madrid"],a:3,e:"Madrid es la capital de España."},
+{t:"Cultura",q:"¿En qué país se celebra 'La Tomatina'?",o:["Argentina","México","España","Perú"],a:2,e:"La Tomatina se celebra en Buñol, cerca de Valencia, en España."},
+{t:"Cultura",q:"¿Cuál de estos países NO tiene el español como lengua oficial?",o:["Brasil","México","Argentina","Colombia"],a:0,e:"En Brasil se habla portugués; los demás son países hispanohablantes."},
+{t:"Cultura",q:"El 'Día de los Muertos' es una fiesta tradicional de:",o:["Uruguay","España","Chile","México"],a:3,e:"Es una celebración mexicana que honra a los difuntos los días 1 y 2 de noviembre."},
+{t:"Cultura",q:"El flamenco es un arte tradicional de:",o:["Argentina","Andalucía, España","Cuba","Galicia, España"],a:1,e:"El flamenco nace en Andalucía, en el sur de España."},
+];
+let current=0, answers=Array(questions.length).fill(null), submitted=false;
+const $=id=>document.getElementById(id);
+function render(){
+ const q=questions[current];
+ $("counter").textContent=`Question ${current+1} of ${questions.length}`;
+ $("answered").textContent=`${answers.filter(x=>x!==null).length} answered`;
+ $("bar").style.width=`${(current+1)/questions.length*100}%`;
+ $("topic").textContent=q.t;
+ $("question").textContent=q.q;
+ $("options").innerHTML="";
+ q.o.forEach((opt,i)=>{
+  const label=document.createElement("label");label.className="option"+(answers[current]===i?" selected":"");
+  label.innerHTML=`<input type="radio" name="answer" ${answers[current]===i?"checked":""}> <span>${String.fromCharCode(65+i)}. ${opt}</span>`;
+  label.addEventListener("click",()=>{if(submitted)return;answers[current]=i;render()});
+  $("options").appendChild(label);
+ });
+ $("feedback").className="feedback";$("feedback").textContent="";
+ $("prev").disabled=current===0;
+ $("next").style.display=current===questions.length-1?"none":"inline-block";
+ $("submit").style.display=current===questions.length-1?"inline-block":"none";
+}
+$("prev").onclick=()=>{if(current>0){current--;render()}};
+$("next").onclick=()=>{if(current<questions.length-1){current++;render()}};
+$("submit").onclick=()=>{
+ const missing=answers.filter(x=>x===null).length;
+ if(missing){alert(`Please answer all questions. ${missing} question(s) remain unanswered.`);return}
+ submitted=true;let score=0;
+ questions.forEach((q,i)=>{if(answers[i]===q.a)score++});
+ $("quiz").style.display="none";$("result").style.display="block";
+ $("score").textContent=`${score} / ${questions.length} (${Math.round(score/questions.length*100)}%)`;
+ $("message").textContent=score>=22?"Excellent work! You are well prepared.":score>=17?"Good effort. Review the explanations below and strengthen a few concepts.":score>=12?"A fair attempt. Revise the topics and try again.":"Keep practising. Read each explanation and retake the quiz.";
+ $("review").innerHTML="<h3>Answer review</h3>";
+ questions.forEach((q,i)=>{
+  const ok=answers[i]===q.a, div=document.createElement("div");div.className="review-item";
+  div.innerHTML=`<strong class="${ok?'correct':'wrong'}">${i+1}. ${ok?'Correct':'Incorrect'} — ${q.t}</strong><div>${q.q}</div><div><b>Your answer:</b> ${q.o[answers[i]]}</div><div><b>Correct answer:</b> ${q.o[q.a]}</div><div class="small">${q.e}</div>`;
+  $("review").appendChild(div);
+ });
+ window.scrollTo({top:0,behavior:"smooth"});
+};
+$("retry").onclick=()=>{current=0;answers=Array(questions.length).fill(null);submitted=false;$("result").style.display="none";$("quiz").style.display="block";render();window.scrollTo({top:0,behavior:"smooth"})};
+$("print").onclick=()=>window.print();
+render();
+</script>
+</body>
+</html>

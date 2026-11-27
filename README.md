@@ -1,8 +1,10 @@
-# Class 10 AI — KIPS Practice Quiz
+# Class 10 practice quizzes
 
-An interactive, self-contained practice quiz for Class 10 AI.
+Self-contained, no-dependency HTML quizzes. Open in any browser, or use the Pages links.
 
-Open `index.html`, or use the GitHub Pages link. No dependencies, no tracking,
-no network calls — everything runs in the browser.
+| Quiz | Page |
+|---|---|
+| Artificial Intelligence (75 MCQs) | [`index.html`](index.html) |
+| **Spanish — CBSE Class 10 (100 MCQs)** | [`spanish.html`](spanish.html) |
 
-Built for my daughter.
+Each quiz shuffles answer positions, gives an explanation for every question, and runs entirely offline.
